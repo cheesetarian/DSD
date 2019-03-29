@@ -19,8 +19,8 @@ import pickle
 from scipy.optimize import curve_fit
 
 # call plotBIC using pre-run input data from OceanClustering:
-repeated = 35
-max_gr = 15
+repeated = 35 #10
+max_gr = 12  #60
 dtype = "norm"
 addr = "/home/dudavid/projects/dsd/dj/OceanClustering/" 
 pver = '_v3MSs4' # plot version, added DD -- not automated with input data form
@@ -65,7 +65,7 @@ def plotBIC(address, repeat_bic, max_groups, dtype, trend=False):
     bic_many, bic_mean, bic_stdev, n_mean, n_stdev, n_min = None, None, None, None, None, None
     bic_many, bic_mean, bic_stdev, n_mean, n_stdev, n_min = readBIC(address, repeat_bic)
     n_comp_array = None
-    n_comp_array = np.arange(1, max_groups)
+    n_comp_array = np.arange(1, max_groups) #, 3) # trying this
     
     print("Calculating n and then averaging across runs, n = ", n_mean, "+-", n_stdev)
     print("Averaging BIC scores and then calculating, n = ", n_min)
@@ -103,7 +103,7 @@ def plotBIC(address, repeat_bic, max_groups, dtype, trend=False):
         
     ax1.set_ylabel("BIC value")
     ax1.ticklabel_format(style='sci', axis='y', scilimits=(0,0))
-    ax1.set_xlabel(r"N$_{gmm}$")
+    ax1.set_xlabel(r"N$_{GMM}$")
     ax1.grid(True)
     #ax1.set_title("BIC values for GMM with different number of components")
     ax1.set_ylim(min(bic_mean)*0.95, min(bic_mean)*1.08)
